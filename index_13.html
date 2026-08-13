@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeta MO · 组织架构与岗位职责 | Org Chart &amp; Responsibilities</title>
+<style>
+:root{
+  --bg:#f4f5f7; --surface:#fff; --surface-2:#fbfbfa;
+  --text:#1b1b19; --text-2:#5c5b57; --text-3:#8b8a85;
+  --line:#dbdad3; --line-soft:#eae9e3;
+  --shadow:0 1px 2px rgba(20,20,18,.04),0 4px 14px rgba(20,20,18,.05);
+  --shadow-lg:0 2px 6px rgba(20,20,18,.06),0 18px 44px rgba(20,20,18,.13);
+  --radius:14px;
+  --navy:#0c447c; --navy-2:#185fa5; --navy-bg:#e6f1fb;
+  --teal:#0f6e56; --teal-2:#1d9e75; --teal-bg:#e1f5ee;
+  --amber:#854f0b; --amber-2:#ba7517; --amber-bg:#faeeda;
+  --purple:#3c3489; --purple-2:#534ab7; --purple-bg:#eeedfe;
+  --coral:#993c1d; --coral-2:#d85a30; --coral-bg:#faece7;
+  --gray:#5f5e5a; --gray-2:#888780; --gray-bg:#f1efe8;
+  --zoom:1;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#18181६; --bg:#181816; --surface:#232320; --surface-2:#2a2a26;
+  --text:#f1f0ea; --text-2:#b5b3aa; --text-3:#8b8a85;
+  --line:#3e3e3a; --line-soft:#333330;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.3);
+  --shadow-lg:0 2px 6px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.5);
+  --navy:#85b7eb; --navy-2:#378add; --navy-bg:#0c2c4d;
+  --teal:#5dcaa5; --teal-2:#1d9e75; --teal-bg:#0b3a2e;
+  --amber:#efa427; --amber-2:#ba7517; --amber-bg:#3d2607;
+  --purple:#afa9ec; --purple-2:#7f77dd; --purple-bg:#241f52;
+  --coral:#f0997b; --coral-2:#d85a30; --coral-bg:#3f1a0d;
+  --gray:#b5b3aa; --gray-2:#888780; --gray-bg:#2e2e2a;
+}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.en-s{color:var(--text-3);font-weight:400}
+
+/* hero */
+.hero{background:linear-gradient(135deg,#0c447c 0%,#123a63 55%,#0f6e56 140%);color:#fff;padding:40px 24px 32px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(900px 300px at 85% -30%,rgba(93,202,165,.32),transparent 60%);pointer-events:none}
+.hero-in{max-width:1300px;margin:0 auto;position:relative;z-index:1}
+.eyebrow{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;opacity:.72;font-weight:500}
+.hero h1{font-size:clamp(21px,3.2vw,31px);font-weight:600;margin:9px 0 2px;letter-spacing:-.012em}
+.hero h1 .sub{display:block;font-size:clamp(13px,1.6vw,16px);font-weight:400;opacity:.72;letter-spacing:.005em;margin-top:3px}
+.hero p{opacity:.8;font-size:13.5px;max-width:840px;margin-top:10px}
+.hero p .e{display:block;opacity:.72;font-size:12.5px;margin-top:2px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero-meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.17);padding:4px 11px;border-radius:99px;font-size:11.5px}
+
+/* toolbar */
+.toolbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+.toolbar-in{max-width:1300px;margin:0 auto;padding:9px 24px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.search{position:relative;flex:1 1 230px;max-width:330px}
+.search input{width:100%;padding:8px 12px 8px 32px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .18s,box-shadow .18s}
+.search input:focus{border-color:var(--navy-2);box-shadow:0 0 0 3px color-mix(in srgb,var(--navy-2) 16%,transparent)}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.45}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--text);padding:6px 12px;border-radius:9px;font-size:12.5px;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .16s;white-space:nowrap;line-height:1.35}
+.btn i{font-style:normal;color:var(--text-3);font-size:11px}
+.btn:hover{border-color:var(--text-3);transform:translateY(-1px)}
+.btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.on i{color:rgba(255,255,255,.7)}
+.zoom{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--surface)}
+.zoom button{border:0;background:transparent;color:var(--text);width:29px;height:31px;cursor:pointer;font-size:15px;font-family:inherit}
+.zoom button:hover{background:var(--gray-bg)}
+.zoom span{font-size:11.5px;color:var(--text-2);min-width:42px;text-align:center;border-left:1px solid var(--line);border-right:1px solid var(--line);line-height:31px}
+.spacer{flex:1}
+.hint{font-size:11.5px;color:var(--text-3);line-height:1.35}
+
+/* layout */
+.wrap{max-width:1300px;margin:0 auto;padding:8px 24px 70px}
+.sec{margin-top:38px}
+.sec-head{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;padding-bottom:8px;border-bottom:1px solid var(--line-soft);margin-bottom:13px}
+.sec-head h2{font-size:18.5px;font-weight:600;letter-spacing:-.01em}
+.sec-head .en{font-size:12.5px;color:var(--text-3)}
+.sec-sub{font-size:13px;color:var(--text-2);margin-bottom:16px;max-width:940px}
+.sec-sub .e{display:block;color:var(--text-3);font-size:12px;margin-top:2px}
+
+/* tree */
+.canvas{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 8px 30px;overflow-x:auto;overflow-y:hidden}
+.canvas::-webkit-scrollbar{height:9px}
+.canvas::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+.zoomer{transform:scale(var(--zoom));transform-origin:top left;transition:transform .28s cubic-bezier(.2,.8,.2,1),margin-left .28s cubic-bezier(.2,.8,.2,1);width:max-content;min-width:100%;padding:0 24px}
+.tree ul{display:flex;justify-content:center;position:relative;padding-top:26px;list-style:none}
+.tree li{position:relative;padding:26px 7px 0;display:flex;flex-direction:column;align-items:center;list-style:none}
+.tree li::before,.tree li::after{content:'';position:absolute;top:0;right:50%;width:50%;height:26px;border-top:1.5px solid var(--line)}
+.tree li::after{right:auto;left:50%;border-left:1.5px solid var(--line);border-top:1.5px solid var(--line)}
+.tree li:only-child{padding-top:12px}
+.tree li:only-child::after,.tree li:only-child::before{display:none}
+.tree li:first-child::before,.tree li:last-child::after{border:0 none}
+.tree li:last-child::before{border-right:1.5px solid var(--line);border-radius:0 7px 0 0}
+.tree li:first-child::after{border-radius:7px 0 0 0}
+.tree ul ul::before{content:'';position:absolute;top:0;left:50%;border-left:1.5px solid var(--line);height:26px}
+.tree li.dashed::before,.tree li.dashed::after{border-style:dashed}
+.tree li.collapsed > ul{display:none}
+.node{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 13px 12px;min-width:166px;max-width:212px;text-align:center;cursor:pointer;box-shadow:var(--shadow);transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,border-color .2s,opacity .25s;opacity:0;transform:translateY(14px)}
+.node.in{opacity:1;transform:translateY(0)}
+.node::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;border-radius:12px 12px 0 0;background:var(--accent,var(--gray-2));transition:height .2s}
+.node:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--accent,var(--line))}
+.node:hover::before{height:5px}
+.node.active{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent),var(--shadow-lg)}
+.node .cn{font-size:14.5px;font-weight:600;line-height:1.32;letter-spacing:-.005em}
+.node .en{font-size:10.5px;color:var(--text-3);margin-top:2px;letter-spacing:.015em;line-height:1.35}
+.node .who{display:inline-block;margin-top:8px;font-size:11px;font-weight:500;padding:2px 9px;border-radius:99px;background:var(--accent-bg);color:var(--accent)}
+.node .chips{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:8px}
+.node .chips i{font-style:normal;font-size:10px;color:var(--text-2);background:var(--gray-bg);border:1px dashed var(--line);padding:2px 7px;border-radius:99px}
+.node.muted{border-style:dashed;background:var(--surface-2)}
+.node.muted .cn{color:var(--text-2);font-weight:500}
+.node .count{position:absolute;bottom:-9px;left:50%;transform:translateX(-50%);font-size:10px;background:var(--surface);border:1px solid var(--line);color:var(--text-3);width:19px;height:19px;line-height:17px;border-radius:50%}
+.node .count:hover{background:var(--gray-bg);color:var(--text)}
+.node.dim{opacity:.2;filter:grayscale(.6)}
+.node.hit{border-color:var(--amber-2);box-shadow:0 0 0 3px color-mix(in srgb,var(--amber-2) 24%,transparent)}
+.a-navy{--accent:var(--navy);--accent-bg:var(--navy-bg)}
+.a-blue{--accent:var(--navy-2);--accent-bg:var(--navy-bg)}
+.a-teal{--accent:var(--teal);--accent-bg:var(--teal-bg)}
+.a-teal2{--accent:var(--teal-2);--accent-bg:var(--teal-bg)}
+.a-amber{--accent:var(--amber);--accent-bg:var(--amber-bg)}
+.a-purple{--accent:var(--purple);--accent-bg:var(--purple-bg)}
+.a-coral{--accent:var(--coral);--accent-bg:var(--coral-bg)}
+.a-gray{--accent:var(--gray-2);--accent-bg:var(--gray-bg)}
+#scrollHint{display:none;font-size:11.5px;color:var(--text-3);text-align:center;margin-top:9px}
+
+/* flowchart */
+.pipe{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 22px 18px;overflow:hidden}
+.routes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.rt{border:1px solid var(--line);background:var(--surface);color:var(--text-2);padding:5px 11px;border-radius:99px;font-size:12px;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .16s}
+.rt b{width:9px;height:9px;border-radius:50%;display:inline-block;transition:opacity .16s}
+.rt.on{color:var(--text);border-color:var(--text-3)}
+.rt:not(.on){opacity:.5}
+.rt:not(.on) b{opacity:.3}
+.svgwrap{overflow-x:auto;overflow-y:hidden;padding-bottom:4px}
+.svgwrap::-webkit-scrollbar{height:9px}
+.svgwrap::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+#flow{width:100%;min-width:1080px;display:block}
+#flow text{font-family:inherit}
+.st{cursor:pointer;transition:transform .2s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.st:hover{transform:translateY(-3px)}
+.st .bx{transition:stroke-width .18s}
+.st:hover .bx{stroke-width:2.2}
+.st.act .bx{stroke-width:2.6}
+.st .k{font-size:9.5px;letter-spacing:.1em;font-weight:600}
+.st .en{font-size:12.5px;font-weight:600}
+.st .cn{font-size:11px}
+.st .ro{font-size:10px;font-weight:500}
+.st.dim{opacity:.14}
+.st.hit .bx{stroke-width:3}
+.conn{fill:none;stroke-width:1.6;stroke-linecap:round}
+.rlabel{font-size:10.5px}
+#flow.h-main .r-main,#flow.h-new .r-new,#flow.h-dq .r-dq{opacity:.09;pointer-events:none}
+.r-main,.r-new,.r-dq{transition:opacity .3s}
+.pipe-note{font-size:11.5px;color:var(--text-3);margin-top:13px;line-height:1.65}
+.pipe-note a{color:var(--navy-2)}
+
+/* responsibility cards */
+.cards{column-count:3;column-gap:14px}
+@media(max-width:1180px){.cards{column-count:2}}
+@media(max-width:760px){.cards{column-count:1}}
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;opacity:0;transition:opacity .45s;break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 14px;display:inline-block;width:100%}
+.card.in{opacity:1}
+.card-h{padding:14px 18px 12px;background:var(--accent-bg);border-bottom:1px solid var(--line-soft);position:relative}
+.card-h .k{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.card-h h3{font-size:16px;font-weight:600;margin-top:3px;letter-spacing:-.01em}
+.card-h .en{font-size:11.5px;color:var(--text-2);margin-top:1px}
+.card-h .who{display:inline-block;margin-top:9px;font-size:11px;font-weight:500;background:var(--surface);border:1px solid var(--accent);color:var(--accent);padding:2px 10px;border-radius:99px}
+.card-b{padding:15px 18px 16px}
+.blk{margin-bottom:17px}
+.blk:last-child{margin-bottom:0}
+.blk h4{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);padding-bottom:6px;border-bottom:1px solid var(--line-soft);margin-bottom:9px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.blk h4 em{font-style:normal;font-size:9.5px;letter-spacing:.02em;text-transform:none;opacity:.85}
+.blk ul{list-style:none}
+.blk li{position:relative;padding:0 0 0 15px;margin-bottom:8px;font-size:13px;line-height:1.58}
+.blk li:last-child{margin-bottom:0}
+.blk li::before{content:'';position:absolute;left:0;top:8px;width:4.5px;height:4.5px;border-radius:50%;background:var(--accent)}
+.blk li .sub{display:block;font-size:11.5px;color:var(--text-3);margin-top:1px;line-height:1.5}
+.blk li.star::before{background:var(--amber-2);width:5.5px;height:5.5px}
+.blk.sop li::before{background:var(--text-3);width:4px;height:4px;top:8.5px}
+.empty{font-size:12.5px;color:var(--text-3)}
+.srcline{font-size:11px;color:var(--text-3);border-top:1px solid var(--line-soft);padding-top:10px;margin-top:14px;line-height:1.6}
+.notebox{font-size:11.5px;color:var(--text-2);background:var(--gray-bg);border-radius:8px;padding:9px 11px;line-height:1.55;margin-top:12px}
+.notebox .e{display:block;color:var(--text-3);font-size:11px;margin-top:1px}
+
+/* drawer */
+.scrim{position:fixed;inset:0;background:rgba(16,16,14,.42);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .26s;z-index:60}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:var(--surface);box-shadow:-14px 0 44px rgba(0,0,0,.18);z-index:70;transform:translateX(102%);transition:transform .34s cubic-bezier(.22,.9,.24,1);display:flex;flex-direction:column}
+.drawer.on{transform:translateX(0)}
+.dr-head{padding:22px 24px 16px;border-bottom:1px solid var(--line-soft);position:relative;background:var(--accent-bg)}
+.dr-head .k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.dr-head h3{font-size:20px;font-weight:600;margin-top:4px;letter-spacing:-.012em}
+.dr-head .en{font-size:12.5px;color:var(--text-2);margin-top:2px}
+.dr-head .who{display:inline-block;margin-top:10px;font-size:11.5px;font-weight:500;background:var(--surface);border:1px solid var(--accent);color:var(--accent);padding:3px 11px;border-radius:99px}
+.close{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--text-2);cursor:pointer;font-size:17px;line-height:1}
+.close:hover{background:var(--gray-bg);color:var(--text)}
+.dr-body{padding:20px 24px 44px;overflow-y:auto;flex:1}
+
+/* notice */
+.notice{margin-top:34px;background:var(--coral-bg);border:1px solid color-mix(in srgb,var(--coral) 30%,transparent);border-radius:var(--radius);padding:20px 24px}
+.notice h3{font-size:15px;font-weight:600;color:var(--coral);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.notice h3 span{font-weight:400;font-size:12.5px;opacity:.8}
+.notice p{font-size:13.5px;line-height:1.7}
+.notice p .e{display:block;font-size:12px;color:var(--text-2);margin-top:1px}
+.notice p+p{margin-top:9px}
+footer{max-width:1300px;margin:0 auto;padding:0 24px 46px;font-size:11.5px;color:var(--text-3);line-height:1.85}
+footer .rule{height:1px;background:var(--line-soft);margin:26px 0 16px}
+
+@media (max-width:640px){
+  .hero{padding:28px 16px 24px}.wrap{padding:6px 14px 56px}.toolbar-in{padding:8px 14px}
+  .drawer{width:100%}.node{min-width:146px}.cards{grid-template-columns:1fr}.pipe{padding:16px 14px 14px}
+}
+@media print{
+  .toolbar,.scrim,.drawer,.hint,#scrollHint,.routes{display:none!important}
+  body{background:#fff}
+  .canvas,.pipe,.card{box-shadow:none;border:1px solid #ccc;overflow:visible;break-inside:avoid}
+  .zoomer{transform:none!important;margin-left:0!important}
+  .node,.card{opacity:1!important;transform:none!important;box-shadow:none}
+  .cards{column-count:2}
+  .hero{background:#0c447c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sec{break-inside:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="eyebrow">Zeta · Missouri (MO)</div>
+    <h1>组织架构与岗位职责<span class="sub">Organization chart &amp; roles / responsibilities</span></h1>
+    <p>整合 MO 公司组织架构、各部门岗位职责，以及 Inbound Pipeline SOP 中每个工位的 Key Actions 与 Standards。点击任意方块查看完整职责。
+      <span class="e">Combines the MO Company org structure, departmental responsibilities, and the key actions &amp; standards for every station in the inbound pipeline SOP. Click any block for full detail.</span></p>
+    <div class="hero-meta">
+      <span>适用周期 Valid for ≈ 6 months</span>
+      <span>Inbound Pipeline SOP V1.2</span>
+      <span id="stamp"></span>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="toolbar-in">
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="搜索岗位 / 人员 / 职责　Search roles, people, duties" autocomplete="off">
+    </div>
+    <button class="btn" id="expand">收起全部 <i>Collapse</i></button>
+    <button class="btn" id="pause">暂停动画 <i>Pause</i></button>
+    <div class="zoom"><button id="zout" aria-label="缩小">−</button><span id="zval">100%</span><button id="zin" aria-label="放大">+</button></div>
+    <button class="btn" id="print">打印 / PDF <i>Print</i></button>
+    <div class="spacer"></div>
+    <div class="hint">点击方块查看职责<br>Click a block for details</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="sec">
+    <div class="sec-head"><h2>一、组织架构</h2><span class="en">Organization structure</span></div>
+    <p class="sec-sub">Alex 为 MO 公司总经理；集团层下另有其他公司，以虚线表示平行关系。标有「待定 / 待确认」的为尚未最终确定的人员安排。
+      <span class="e">Alex is the General Manager of MO Company. Other group companies sit in parallel, shown with dashed connectors. “TBD / TBC” marks appointments not yet finalized.</span></p>
+    <div class="canvas"><div class="zoomer"><div class="tree" id="tree"></div></div></div>
+    <div id="scrollHint">← 左右滑动查看完整架构，或用上方 +/− 缩放　Scroll horizontally or use +/− to zoom →</div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>二、收货入库流程</h2><span class="en">Inbound pipeline · assembly-line workflow</span></div>
+    <p class="sec-sub">主线：收货 → 拆包 → 质检 → 测试 → 翻新 → 包装 → 入库；全新品验证 OK 可直接入库；异常件走 DQ → RMA → PO 关闭。点击任一工位查看该角色的 Key Actions 与 Standards。
+      <span class="e">Main line: Receiving → Unpacking → Inspection → Testing → Refurbishing → Packing → Warehousing. Brand-new units verified OK may go straight to the warehouse; discrepancies follow the DQ → RMA → PO-closed lane.</span></p>
+    <div class="pipe" id="pipe">
+      <div class="routes">
+        <button class="rt on" data-r="main"><b style="background:var(--teal-2)"></b>主线 Main line</button>
+        <button class="rt on" data-r="new"><b style="background:var(--navy-2)"></b>全新品直接入库 Brand-new direct</button>
+        <button class="rt on" data-r="dq"><b style="background:var(--coral-2)"></b>异常线 DQ · RMA</button>
+      </div>
+      <div class="svgwrap"><svg id="flow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1380 452" role="img" aria-label="收货入库流程图 Inbound pipeline flowchart"></svg></div>
+      <div class="pipe-note">流程图独立页面（含各工位职责卡片）：<a href="pipeline.html">收货入库流程 · Inbound Pipeline →</a><br>Standalone flowchart page with per-station responsibility cards.</div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head"><h2>三、岗位职责一览</h2><span class="en">Responsibilities at a glance</span></div>
+    <p class="sec-sub">下方按组织层级列出每个岗位的职责；带 SOP 标记的另附流程关键动作与标准（英文为 SOP 原文）。
+      <span class="e">Responsibilities for every role, ordered by reporting line. Roles marked SOP also carry the pipeline key actions and standards (English is the SOP source text).</span></p>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <div class="notice">
+    <h3>通用工作准则（适用于所有岗位）<span>General working principle · all roles</span></h3>
+    <p>所有的岗位都要做好自己岗位职责内的事情，确保公司的流程化。
+      <span class="e">Every role must complete the work within their own remit so that the company stays process-driven.</span></p>
+    <p>不要给其他部门制造麻烦，确保自己手里的工作都能做好，<strong>不要把自己的问题转移到下一个部门</strong>。
+      <span class="e">Do not create trouble for other departments — finish your own work properly and <strong>never pass your problems on to the next department</strong>.</span></p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="rule"></div>
+  本架构图适用于未来半年（约 6 个月）内的组织安排，后续可根据业务发展调整。<br>
+  This chart covers the organization for roughly the next six months and may be adjusted as the business develops.<br>
+  岗位职责中的 Key Actions / Standards 摘自 RampingUp · Inbound Pipeline SOP · Line #1（原文为英文，中文为对照翻译）。
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="dr-head" id="drHead">
+    <button class="close" id="close" aria-label="关闭 Close">×</button>
+    <div class="k" id="drKind"></div>
+    <h3 id="drCn"></h3>
+    <div class="en" id="drEn"></div>
+    <div id="drWhoWrap"></div>
+  </div>
+  <div class="dr-body" id="drBody"></div>
+</aside>
+
+<script>
+/* ============ DATA ============ */
+const D = {
+  group:{kind:'集团 · Group',cn:'集团层',en:'Group',who:'负责人 Head：Pei Zhang',accent:'navy',
+    duties:[{cn:'统筹集团层面事务，下辖 MO 公司及其他公司',en:'Oversees group-level affairs; MO Company and the other companies sit below'}],
+    note:{cn:'集团层具体职责分工待补充。',en:'Detailed group-level responsibilities to be added.'}},
+
+  others:{kind:'平行单位 · Parallel',cn:'其他公司',en:'Other Companies',accent:'gray',
+    duties:[{cn:'集团旗下的其他公司，与 MO 公司平行，不归 MO 总经理管辖',en:'Other companies under the group, parallel to MO Company and outside the remit of the MO General Manager'}],
+    note:{cn:'公司数量与名称待补充。',en:'Number and names of companies to be confirmed.'}},
+
+  gm:{kind:'总经理 · General Manager',cn:'总经理',en:'General Manager · MO Company',who:'负责人 Head：Alex',accent:'blue',
+    duties:[
+      {cn:'确保 MO 公司整体业务符合公司的业务需求，保证业务顺畅通达',en:'Ensure the overall operations of MO Company meet company requirements and run smoothly'},
+      {cn:'财务与仓库的安全',en:'Safeguard finance and warehouse security'},
+      {cn:'人员培训与规范',en:'Staff training and standardization'},
+      {cn:'招聘等各项事务',en:'Recruitment and related affairs'},
+      {cn:'管理好下属的几个部门，确保各部门主管做好自己的职责',en:'Manage the departments below and ensure every department head fulfils their duties'},
+      {cn:'配合老板做其他的任务指派',en:'Support the owner with other assigned tasks'},
+      {cn:'确保所有的业务都按照公司的规划顺利进行',en:'Ensure all business proceeds according to company plans'}
+    ]},
+
+  warehouse:{kind:'部门 · Department',cn:'仓库部',en:'Warehouse',who:'负责人 Head：待定 TBD',accent:'teal',
+    duties:[
+      {cn:'仓库主管负责统筹全局',en:'The warehouse supervisor coordinates the whole operation'},
+      {cn:'协调 Receiving、Shipping 及测试部门之间的联系与工作',en:'Coordinate work and communication between Receiving, Shipping and Testing'},
+      {cn:'负责仓库布局与仓库安全保障',en:'Own warehouse layout and safety'},
+      {cn:'做好库位的安排与整理',en:'Arrange and maintain bin locations'},
+      {cn:'对仓库每个产品定期做好盘点，确保产品的数量、型号和系统保持一致性',en:'Run regular stock counts so quantity and model always match the system'},
+      {cn:'确保收发货顺畅',en:'Keep inbound and outbound flowing smoothly'},
+      {cn:'负责整理仓库',en:'Keep the warehouse organized'},
+      {cn:'配合中国团队在仓库找东西、拍照等（仓库协作）',en:'Support the China team with locating items and taking photos (warehouse collaboration)'}
+    ]},
+
+  finance:{kind:'部门 · Department',cn:'财务部',en:'Finance',who:'负责人 Head：待定 TBD',accent:'amber',
+    duties:[
+      {cn:'财务负责人要确保公司财务安全',en:'The finance lead safeguards company finances'},
+      {cn:'财务流程必须留痕、有审批',en:'Every finance process must be traceable and approved'},
+      {cn:'严格按照公司的制度行事',en:'Act strictly in line with company policy'}
+    ]},
+
+  tech:{kind:'部门 · Department',cn:'技术 / 测试部',en:'Technology / Testing',who:'负责人 Head：Keith',accent:'purple',
+    duties:[
+      {cn:'负责所有 Testing 业务及 IT 相关事宜',en:'Own all testing operations and IT matters'},
+      {cn:'确保测试顺畅及交付标准',en:'Ensure testing runs smoothly and meets delivery standards'},
+      {cn:'需单独负责 Memory 业务',en:'Personally responsible for the Memory line'},
+      {cn:'负责总体的测试规范，组织与培训所有测试工程师的测试工作',en:'Own overall test standards; organize and train all test engineers'}
+    ],
+    note:{cn:'技术部门与测试部门已合并为同一部门，下属岗位直接汇报给 Keith。',en:'Technology and Testing are merged into one department; all roles below report directly to Keith.'}},
+
+  receiving:{kind:'工位 · Station',cn:'收货部门',en:'Receiving',who:'主管 Supervisor：待定 TBD',accent:'teal2',
+    duties:[
+      {cn:'主管需协调 Unpacking、Inspecting 和 Testing 部门的工作，确保准确入库',en:'The supervisor coordinates Unpacking, Inspecting and Testing to ensure accurate put-away'},
+      {cn:'主管需确保每个产品符合入库标准，干净整洁、无异物',en:'The supervisor ensures every product meets the inbound standard: clean and free of foreign matter'},
+      {cn:'主管需确保每个产品都放在正确的库位上',en:'The supervisor ensures every product is placed in the correct bin location'},
+      {cn:'协调好下属几个人员的工作',en:'Coordinate the work of the team members below'},
+      {cn:'下设 Unpacking、Inspecting、REF and Receiving 三个环节',en:'Comprises three stages: Unpacking, Inspecting, REF and Receiving'}
+    ],
+    sopRole:'Receiver',
+    actions:[
+      {en:'Receive and sign for courier packages',cn:'签收快递包裹'},
+      {en:'Place packages in the designated staging area by batch; log source, quantity and batch',cn:'按批次将包裹放入指定暂存区，登记来源、数量与批次'},
+      {en:'Feed packages onto the line in order',cn:'按顺序将包裹送上流水线'}
+    ],
+    standards:[
+      {en:'Packages never left on the floor; stored by zone',cn:'包裹不可随意落地，须分区存放'},
+      {en:'Same-day packages processed on the line the same day',cn:'当日到货当日上线处理'}
+    ]},
+
+  unpacking:{kind:'工位 · Station',cn:'拆包',en:'Unpacking',accent:'teal2',
+    duties:[
+      {cn:'拆包裹',en:'Unpack the parcels'},
+      {cn:'核对采购订单（PO）的数量、编号和型号是否一致',en:'Verify that PO quantity, part number and model all match'},
+      {cn:'发现问题上报 DQ',en:'Report any discrepancy to DQ'}
+    ],
+    sopRole:'Unpacker',
+    actions:[
+      {en:'Remove outer packaging; verify the PO against the actual goods received',cn:'拆除外包装，核对 PO 与实际到货'},
+      {en:'Match → proceed to Initial Inspection',cn:'一致 → 进入初检 Inspecting'},
+      {en:'Mismatch → log the issue into DQ',cn:'不一致 → 问题登记进 DQ'},
+      {en:'Place materials into the matching product container (e.g. NICs into their dedicated box) to avoid damage and double handling',cn:'物料放入对应产品的容器（如网卡放入专用盒），避免损坏与二次搬运'}
+    ],
+    standards:[
+      {en:'Routing decided by the unpacker per standard',cn:'由拆包人员按标准判定流向'},
+      {en:'Loose parts MUST go into containers — zero part loss',cn:'散件必须入容器 —— 零丢件'}
+    ]},
+
+  inspecting:{kind:'工位 · Station',cn:'质检',en:'Inspecting · Initial Inspection',accent:'teal2',
+    duties:[
+      {cn:'检查产品外观是否有损伤',en:'Check products for cosmetic damage'},
+      {cn:'检查是否符合公司标准及有无假货等',en:'Check compliance with company standards and screen for counterfeits'},
+      {cn:'有问题上报 RMA + DQ',en:'Report issues to RMA + DQ'}
+    ],
+    sopRole:'Inspector',
+    actions:[
+      {en:'Verify product PO info against the order / system records',cn:'核对产品 PO 信息与订单 / 系统记录'},
+      {en:'Match → proceed to Testing',cn:'一致 → 进入 Testing 测试'},
+      {en:'Brand-new product verified OK → may go directly to Warehousing',cn:'全新品验证 OK → 可直接入库'},
+      {en:'Mismatch (missing parts, damage, counterfeit, other issues) → route to DQ',cn:'不一致（缺件、损坏、假货及其他问题）→ 转入 DQ'}
+    ],
+    standards:[
+      {en:'Verification results logged in the system',cn:'核验结果录入系统'}
+    ]},
+
+  refrecv:{kind:'工位 · Station',cn:'入库标准化',en:'REF and Receiving',accent:'teal2',
+    duties:[
+      {cn:'入库前的最后一次检验，是入库的最后一个环节',en:'The final check before put-away — the last step of the inbound process'},
+      {cn:'做最后一次 checking，确保前面环节的工作都是正确的，并达到入库标准',en:'Perform the final check that all upstream work is correct and meets the inbound standard'},
+      {cn:'注意不要重复之前环节已经做过的工作',en:'Do not repeat work already completed at earlier stages'},
+      {cn:'入库产品需要具备直接发货的条件，避免给新品部门造成困扰',en:'Stocked products must be ready to ship directly, so the new-product team is not disrupted'},
+      {cn:'负责每个产品的 SN 扫描入库',en:'Scan the serial number of every product into the system on put-away'},
+      {cn:'最后一步须确认把需要入库的产品放在正确的库位上（库位上一般都标有 Part Number 和 Bin Number）',en:'Final step: confirm each product sits in the correct bin (bins carry part number and bin number)'}
+    ],
+    sopRole:'Refurb Tech / Packer / Inbound',
+    actions:[
+      {en:'For heavily stained surfaces, clean with cotton swabs, alcohol and board-cleaning solvent',cn:'表面污渍较重的，用棉签、酒精及洗板水清洁'},
+      {en:'Prepare items one by one against the packing standard checklist',cn:'按包装标准清单逐件准备'},
+      {en:'Products requiring plastic boxes (e.g. NICs) get their plastic box',cn:'需要塑料盒的产品（如网卡）配塑料盒'},
+      {en:'Products requiring double baffles get their double baffles',cn:'需要双挡板的产品配双挡板'},
+      {en:'Scan into the warehouse and bind to a storage location',cn:'扫描入库并绑定库位'},
+      {en:'Update inventory status in the system',cn:'在系统中更新库存状态'},
+      {en:'Shelve by category / condition grade',cn:'按类别 / 成色等级上架'}
+    ],
+    standards:[
+      {en:'★ Core rule: packing prep is completed after testing, during refurbishing, and before warehousing',cn:'★ 核心规则：包装准备在测试之后、翻新期间、入库之前完成',star:true},
+      {en:'No product enters the warehouse without meeting the packing standard',cn:'未达到包装标准的产品不得入库'},
+      {en:'Handle gently — no rough handling',cn:'轻拿轻放，不可粗暴操作'},
+      {en:'Tested-OK products under the PO flow into the warehouse',cn:'该 PO 下测试 OK 的产品流入仓库'},
+      {en:'POs with DQ items close only after DQ / RMA handling is complete',cn:'含 DQ 的 PO 须在 DQ / RMA 处理完成后才能关闭'}
+    ]},
+
+  shipping:{kind:'工位 · Station',cn:'发货部门',en:'Shipping',who:'主管 Supervisor：待定 TBD',accent:'teal2',
+    duties:[
+      {cn:'负责每日订单处理与发货，确保及时、准确，避免订单混同',en:'Process and ship daily orders on time and accurately; never mix orders'},
+      {cn:'针对不同产品使用特定包装，确保发货安全性',en:'Use the specified packaging per product to keep shipments safe'}
+    ],
+    members:[{cn:'员工一',en:'Staff 1'},{cn:'员工二',en:'Staff 2'},{cn:'员工三',en:'Staff 3'}]},
+
+  room1:{kind:'测试房间 · Test room',cn:'测试房间 1',en:'Test room 1 · Memory',who:'负责人 Head：Keith',accent:'coral',
+    duties:[{cn:'负责 Memory（内存）测试',en:'Responsible for memory testing'}],shared:'tester'},
+  room2:{kind:'测试房间 · Test room',cn:'测试房间 2',en:'Test room 2 · NIC & GPU',who:'负责人 Head：待确认 TBC',accent:'coral',tbd:true,
+    duties:[{cn:'负责网卡和 GPU 测试',en:'Responsible for NIC and GPU testing'}],shared:'tester'},
+  room3:{kind:'测试房间 · Test room',cn:'测试房间 3',en:'Test room 3 · Others',who:'负责人 Head：待确认 TBC',accent:'coral',tbd:true,
+    duties:[{cn:'负责其他测试项目（如 CPU 等），功能可后续调整',en:'Responsible for other tests (e.g. CPU); scope may be adjusted later'}],shared:'tester'},
+
+  testing:{kind:'工位 · Station',cn:'测试',en:'Testing',who:'测试工程师 Test engineer',accent:'purple',
+    duties:[
+      {cn:'确保每个产品测试完整，达到可交付状态，杜绝测试后仍有坏件的情况',en:'Test every product completely to a deliverable state; no defective unit may pass testing'},
+      {cn:'每个测试员要对其负责的类目进行深入研究，确保测试方案的可行性',en:'Every tester studies their assigned category in depth to keep the test method sound'},
+      {cn:'不断研究新方案，以降低售后率，达到完美交付',en:'Keep developing new methods to cut the after-sales rate and reach perfect delivery'},
+      {cn:'测试不通过的产品须上报 DQ',en:'Report every failed unit to DQ'},
+      {cn:'将测试失败的产品写进系统并做好标记（在每个 PO 里都做好标记）',en:'Record failed units in the system and flag them in every PO'},
+      {cn:'上报 DQ 人员进行 RMA 处理',en:'Hand over to DQ staff for RMA handling'},
+      {cn:'测试需具备专业性，并负责培训新员工',en:'Testing must be professional; train new staff'}
+    ],
+    sopRole:'Tester',
+    actions:[
+      {en:'Run on-bench functional tests and record results',cn:'上机做功能测试并记录结果'},
+      {en:'Pass → Refurbishing',cn:'通过 → 进入 Refurbishing 翻新'},
+      {en:'Fail → log into DQ, enter the RMA process',cn:'不通过 → 登记 DQ，进入 RMA 流程'}
+    ],
+    standards:[
+      {en:'Each product follows its standard test procedure (see Product Testing Knowledge Base)',cn:'每类产品按其标准测试流程执行（见产品测试知识库）'},
+      {en:'Handle products with care',cn:'轻拿轻放，爱护产品'}
+    ]},
+
+  refurbishing:{kind:'工位 · Station',cn:'翻新',en:'Refurbishing',who:'Refurb Tech',accent:'teal2',
+    duties:[{cn:'隶属 REF and Receiving 环节，负责产品翻新清洁',en:'Part of REF and Receiving; cleans and refurbishes products'}],
+    sopRole:'Refurb Tech',
+    actions:[{en:'For heavily stained surfaces, clean with cotton swabs, alcohol and board-cleaning solvent',cn:'表面污渍较重的，用棉签、酒精及洗板水清洁'}],
+    standards:[{en:'Handle gently — no rough handling',cn:'轻拿轻放，不可粗暴操作'}]},
+
+  packing:{kind:'工位 · Station',cn:'包装标准',en:'Packing Standard',who:'Packer',accent:'teal2',
+    duties:[{cn:'隶属 REF and Receiving 环节，按包装标准完成入库前准备',en:'Part of REF and Receiving; completes pre-warehousing prep to the packing standard'}],
+    sopRole:'Packer',
+    actions:[
+      {en:'Prepare items one by one against the packing standard checklist',cn:'按包装标准清单逐件准备'},
+      {en:'Products requiring plastic boxes (e.g. NICs) get their plastic box',cn:'需要塑料盒的产品（如网卡）配塑料盒'},
+      {en:'Products requiring double baffles get their double baffles',cn:'需要双挡板的产品配双挡板'}
+    ],
+    standards:[
+      {en:'★ Core rule: packing prep is completed after testing, during refurbishing, and before warehousing',cn:'★ 核心规则：包装准备在测试之后、翻新期间、入库之前完成',star:true},
+      {en:'No product enters the warehouse without meeting the packing standard',cn:'未达到包装标准的产品不得入库'}
+    ]},
+
+  warehousing:{kind:'工位 · Station',cn:'入库上架',en:'Warehousing',who:'Inbound',accent:'blue',
+    duties:[
+      {cn:'入库的最后一个环节，确认产品放在正确的库位上',en:'Final inbound step: confirm each product sits in the correct bin location'},
+      {cn:'库位上一般都标有 Part Number 和 Bin Number，须逐一核对',en:'Bins are labelled with part number and bin number; check each one'},
+      {cn:'负责每个产品的 SN 扫描入库',en:'Scan the serial number of every product into the system'},
+      {cn:'入库产品需具备直接发货的条件',en:'Stocked products must be ready to ship directly'}
+    ],
+    sopRole:'Inbound',
+    actions:[
+      {en:'Scan into the warehouse and bind to a storage location',cn:'扫描入库并绑定库位'},
+      {en:'Update inventory status in the system',cn:'在系统中更新库存状态'},
+      {en:'Shelve by category / condition grade',cn:'按类别 / 成色等级上架'}
+    ],
+    standards:[
+      {en:'Tested-OK products under the PO flow into the warehouse',cn:'该 PO 下测试 OK 的产品流入仓库'},
+      {en:'POs with DQ items close only after DQ / RMA handling is complete',cn:'含 DQ 的 PO 须在 DQ / RMA 处理完成后才能关闭'}
+    ]},
+
+  dq:{kind:'异常 · Exception',cn:'问题件池',en:'DQ Pool',who:'All stages → RMA',accent:'coral',
+    duties:[{cn:'各环节发现的问题件统一归集，等待 RMA 处理',en:'All discrepancy units from every stage are pooled here awaiting RMA'}],
+    sopRole:'All stages → RMA',
+    actions:[
+      {en:'Unpacking: PO vs. goods mismatch logged into DQ',cn:'拆包：PO 与实物不符登记 DQ'},
+      {en:'Inspection: missing parts, damage, counterfeit and other issues logged into DQ',cn:'质检：缺件、损坏、假货及其他问题登记 DQ'},
+      {en:'Testing: failed units logged into DQ',cn:'测试：不良品登记 DQ'}
+    ],
+    standards:[
+      {en:'DQ items stored separately and labeled',cn:'DQ 物品单独存放并贴标'},
+      {en:'Issue descriptions and photos archived for RMA negotiation',cn:'问题描述与照片归档，供 RMA 协商使用'}
+    ]},
+
+  rma:{kind:'异常 · Exception',cn:'RMA 协商',en:'RMA Negotiation',who:'RMA Specialist',accent:'coral',tbd:true,
+    duties:[{cn:'与客户协商 RMA 方案并完成退款',en:'Negotiate the RMA plan with the customer and complete the refund'}],
+    sopRole:'RMA Specialist',
+    actions:[
+      {en:'Negotiate the RMA plan with the customer',cn:'与客户协商 RMA 方案'},
+      {en:'Complete the refund',cn:'完成退款'},
+      {en:'Follow up on final disposition of DQ items',cn:'跟进 DQ 物品的最终处置'}
+    ],
+    standards:[
+      {en:'Negotiation outcomes and refund records archived',cn:'协商结果与退款记录归档'},
+      {en:'No DQ item enters the warehouse before RMA handling is complete',cn:'RMA 处理完成前，DQ 物品不得入库'}
+    ],
+    note:{cn:'该角色在现有组织架构中的归属部门待确认。',en:'The department this role reports into is yet to be confirmed.'}},
+
+  poclosed:{kind:'流程终点 · Closure',cn:'PO 关闭',en:'PO Closed',who:'RMA Specialist',accent:'blue',
+    duties:[{cn:'确认全部数量对齐后关闭采购订单',en:'Close the purchase order once all quantities reconcile'}],
+    sopRole:'RMA Specialist',
+    actions:[
+      {en:'All DQ items settled via DQ / RMA (refunded)',cn:'所有 DQ 物品经 DQ / RMA 结清（已退款）'},
+      {en:'All passing products put away into the warehouse',cn:'所有合格产品已上架入库'},
+      {en:'Close the PO',cn:'关闭该 PO'}
+    ],
+    standards:[
+      {en:'Before closing: units warehoused + DQ settled = units received',cn:'关闭前：入库数 + DQ 结清数 = 收货数'}
+    ]}
+};
+
+const SHARED = {
+  tester:{cn:'测试工程师职责',en:'Test engineer',items:[
+    {cn:'确保每个产品测试完整，达到可交付状态，杜绝测试后仍有坏件的情况',en:'Test every product completely to a deliverable state; no defective unit may pass testing'},
+    {cn:'对其负责的类目进行深入研究，确保测试方案的可行性',en:'Study the assigned category in depth to keep the test method sound'},
+    {cn:'不断研究新方案，以降低我们的售后率，达到完美交付',en:'Keep developing new methods to cut the after-sales rate and reach perfect delivery'},
+    {cn:'测试不通过的产品须上报 DQ',en:'Report every failed unit to DQ'},
+    {cn:'将测试失败的产品写进系统并做好标记（在每个 PO 里都做好标记）',en:'Record failed units in the system and flag them in every PO'},
+    {cn:'上报 DQ 人员进行 RMA 处理',en:'Hand over to DQ staff for RMA handling'},
+    {cn:'测试需具备专业性，并负责培训新员工',en:'Testing must be professional; train new staff'}
+  ]}
+};
+
+
+/* ============ ORG TREE ============ */
+const ORG = {
+  id:'group',accent:'navy',cn:'集团层',en:'Group',who:'负责人 Head：Pei Zhang',
+  children:[
+    {id:'others',accent:'gray',cn:'其他公司',en:'Other Companies',muted:true,dashed:true,
+      chips:['Other Company 1','Other Company 2','Other Company 3']},
+    {id:'gm',accent:'blue',cn:'总经理',en:'General Manager · MO Company',who:'负责人 Head：Alex',children:[
+      {id:'warehouse',accent:'teal',cn:'仓库部',en:'Warehouse',who:'负责人 Head：待定 TBD',children:[
+        {id:'receiving',accent:'teal2',cn:'收货部门',en:'Receiving',who:'主管 Supervisor：待定 TBD',children:[
+          {id:'unpacking',accent:'teal2',cn:'拆包',en:'Unpacking'},
+          {id:'inspecting',accent:'teal2',cn:'质检',en:'Inspecting'},
+          {id:'refrecv',accent:'teal2',cn:'入库标准化',en:'REF and Receiving'}
+        ]},
+        {id:'shipping',accent:'teal2',cn:'发货部门',en:'Shipping',who:'主管 Supervisor：待定 TBD',
+          chips:['员工一 Staff 1','员工二 Staff 2','员工三 Staff 3']}
+      ]},
+      {id:'finance',accent:'amber',cn:'财务部',en:'Finance',who:'负责人 Head：待定 TBD'},
+      {id:'tech',accent:'purple',cn:'技术 / 测试部',en:'Technology / Testing',who:'负责人 Head：Keith',children:[
+        {id:'room1',accent:'coral',cn:'测试房间 1',en:'Test room 1 · Memory',who:'负责人 Head：Keith'},
+        {id:'room2',accent:'coral',cn:'测试房间 2',en:'Test room 2 · NIC & GPU',who:'负责人：待确认 TBC'},
+        {id:'room3',accent:'coral',cn:'测试房间 3',en:'Test room 3 · Others',who:'负责人：待确认 TBC'}
+      ]}
+    ]}
+  ]
+};
+function nodeHTML(n){
+  const chips = n.chips ? `<div class="chips">${n.chips.map(c=>`<i>${c}</i>`).join('')}</div>` : '';
+  const who = n.who ? `<div class="who">${n.who}</div>` : '';
+  const cnt = n.children ? `<span class="count" data-toggle="1">−</span>` : '';
+  return `<div class="node a-${n.accent} ${n.muted?'muted':''}" data-id="${n.id}" tabindex="0" role="button">
+    <div class="cn">${n.cn}</div><div class="en">${n.en||''}</div>${who}${chips}${cnt}</div>`;
+}
+function treeHTML(n){
+  const kids = n.children ? `<ul>${n.children.map(treeHTML).join('')}</ul>` : '';
+  return `<li class="${n.dashed?'dashed':''}">${nodeHTML(n)}${kids}</li>`;
+}
+document.getElementById('tree').innerHTML = `<ul>${treeHTML(ORG)}</ul>`;
+
+/* ============ PIPELINE FLOWCHART (SVG) ============ */
+const CLR={
+  teal:{f:'var(--teal-bg)',s:'var(--teal-2)',t:'var(--teal)'},
+  purple:{f:'var(--purple-bg)',s:'var(--purple-2)',t:'var(--purple)'},
+  blue:{f:'var(--navy-bg)',s:'var(--navy-2)',t:'var(--navy)'},
+  coral:{f:'var(--coral-bg)',s:'var(--coral-2)',t:'var(--coral)'}
+};
+const MAIN=[
+  {id:'receiving',x:39,k:'01',en:'Receiving Area',cn:'收货暂存',ro:'Receiver',c:'teal'},
+  {id:'unpacking',x:231,k:'02',en:'Unpacking',cn:'拆包',ro:'Unpacker',c:'teal'},
+  {id:'inspecting',x:423,k:'03',en:'Initial Inspection',cn:'初检 / 质检',ro:'Inspector',c:'teal'},
+  {id:'testing',x:615,k:'04',en:'Testing',cn:'测试',ro:'Tester',c:'purple'},
+  {id:'refurbishing',x:807,k:'05',en:'Refurbishing',cn:'翻新',ro:'Refurb Tech',c:'teal'},
+  {id:'packing',x:999,k:'06',en:'Packing Standard',cn:'包装标准',ro:'Packer',c:'teal'},
+  {id:'warehousing',x:1191,k:'07',en:'Warehousing',cn:'入库上架',ro:'Inbound',c:'blue'}
+];
+const EXS=[
+  {id:'dq',x:423,w:170,k:'E1',en:'DQ Pool',cn:'问题件池',ro:'All stages → RMA',c:'coral'},
+  {id:'rma',x:700,w:190,k:'E2',en:'RMA Negotiation',cn:'协商退款',ro:'RMA Specialist',c:'coral'},
+  {id:'poclosed',x:1000,w:170,k:'E3',en:'PO Closed',cn:'PO 关闭',ro:'RMA Specialist',c:'blue'}
+];
+const MW=150,MY=146,BH=84,EY=326;
+function box(s,w,y,route){
+  const c=CLR[s.c], tx=s.x+13;
+  return `<g class="st ${route}" data-id="${s.id}" tabindex="0" role="button" aria-label="${s.en}">
+    <rect class="bx" x="${s.x}" y="${y}" width="${w}" height="${BH}" rx="11" fill="${c.f}" stroke="${c.s}" stroke-width="1.2"/>
+    <rect x="${s.x}" y="${y+14}" width="3.5" height="${BH-28}" rx="2" fill="${c.s}"/>
+    <text class="k" x="${tx}" y="${y+20}" fill="${c.t}" opacity=".72">${s.k}</text>
+    <text class="en" x="${tx}" y="${y+40}" fill="var(--text)">${s.en}</text>
+    <text class="cn" x="${tx}" y="${y+57}" fill="var(--text-2)">${s.cn}</text>
+    <text class="ro" x="${tx}" y="${y+74}" fill="${c.t}">${s.ro}</text>
+  </g>`;
+}
+function conn(id,d,stroke,route,dash){
+  return `<path id="${id}" class="conn ${route}" d="${d}" stroke="${stroke}" ${dash?'stroke-dasharray="6 5"':''} marker-end="url(#ar-${route.slice(2)})"/>`;
+}
+function pkt(pathId,stroke,route,dur,begin){
+  return `<circle class="pk ${route}" r="4.5" fill="${stroke}" opacity=".95">
+    <animateMotion dur="${dur}s" begin="${begin}s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#${pathId}" xlink:href="#${pathId}"/>
+    </animateMotion></circle>`;
+}
+let svg='<defs>'+['main','new','dq','close'].map(r=>{
+  const col = r==='main'?'var(--teal-2)':r==='dq'?'var(--coral-2)':'var(--navy-2)';
+  return `<marker id="ar-${r}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="${col}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
+}).join('')+'</defs>';
+for(let i=0;i<MAIN.length-1;i++){
+  svg+=conn('m'+i,`M${MAIN[i].x+MW+4} 188 H${MAIN[i+1].x-9}`,'var(--teal-2)','r-main');
+}
+svg+=conn('arcNew','M498 146 V90 Q498 68 520 68 H1244 Q1266 68 1266 90 V137','var(--navy-2)','r-new');
+svg+=`<text class="rlabel r-new" x="882" y="58" text-anchor="middle" fill="var(--navy-2)">Brand-new verified OK · 全新品验证 OK 可直接入库</text>`;
+svg+=conn('dq1','M306 230 C306 288,382 300,464 321','var(--coral-2)','r-dq');
+svg+=conn('dq2','M498 230 C498 284,505 300,508 321','var(--coral-2)','r-dq');
+svg+=conn('dq3','M690 230 C690 288,616 300,552 321','var(--coral-2)','r-dq');
+svg+=conn('ex1','M597 368 H691','var(--coral-2)','r-dq');
+svg+=conn('ex2','M894 368 H991','var(--coral-2)','r-dq');
+svg+=conn('cl1','M1266 230 C1266 292,1188 302,1090 321','var(--navy-2)','r-close',true);
+svg+=`<text class="rlabel r-close" x="1356" y="292" text-anchor="end" fill="var(--text-3)" style="font-size:10px">入库完成后对账关闭 PO<tspan x="1356" dy="13">reconcile, then close</tspan></text>`;
+for(let i=0;i<MAIN.length-1;i++) svg+=pkt('m'+i,'var(--teal-2)','r-main',1.9,-(i*0.42).toFixed(2));
+svg+=pkt('arcNew','var(--navy-2)','r-new',3.6,0);
+svg+=pkt('dq1','var(--coral-2)','r-dq',2.4,-0.4);
+svg+=pkt('dq2','var(--coral-2)','r-dq',2.4,-1.2);
+svg+=pkt('dq3','var(--coral-2)','r-dq',2.4,-2);
+svg+=pkt('ex1','var(--coral-2)','r-dq',1.9,-0.5);
+svg+=pkt('ex2','var(--coral-2)','r-dq',1.9,-1.3);
+MAIN.forEach(s=>{svg+=box(s,MW,MY,s.id==='warehousing'?'r-main r-new':'r-main')});
+EXS.forEach(s=>{svg+=box(s,s.w,EY,'r-dq')});
+document.getElementById('flow').innerHTML=svg;
+
+document.querySelectorAll('.rt').forEach(b=>{
+  b.onclick=()=>{
+    b.classList.toggle('on');
+    document.getElementById('flow').classList.toggle('h-'+b.dataset.r,!b.classList.contains('on'));
+  };
+});
+
+/* ============ SHARED RENDERERS ============ */
+function bi(x,order){
+  const main = order==='en' ? (x.en||x.cn) : (x.cn||x.en);
+  const sub  = order==='en' ? (x.en&&x.cn?x.cn:'') : (x.cn&&x.en?x.en:'');
+  return `<li class="${x.star?'star':''}">${main}${sub?`<span class="sub">${sub}</span>`:''}</li>`;
+}
+function list(items,order){
+  if(!items||!items.length) return '';
+  return `<ul>${items.map(x=>bi(x,order)).join('')}</ul>`;
+}
+function bodyHTML(d,inCard){
+  let h='';
+  h+=`<div class="blk a-${d.accent}"><h4>岗位职责 <em>Responsibilities</em></h4>${
+    d.duties&&d.duties.length?list(d.duties,'cn'):'<div class="empty">待补充 To be added</div>'}</div>`;
+  if(d.members) h+=`<div class="blk a-${d.accent}"><h4>成员 <em>Members</em></h4>${list(d.members,'cn')}</div>`;
+  if(d.shared&&SHARED[d.shared]) h+=`<div class="blk a-${d.accent}"><h4>${SHARED[d.shared].cn} <em>${SHARED[d.shared].en}</em></h4>${list(SHARED[d.shared].items,'cn')}</div>`;
+  if(d.actions) h+=`<div class="blk sop a-${d.accent}"><h4>关键动作 <em>SOP · key actions</em></h4>${list(d.actions,'en')}</div>`;
+  if(d.standards) h+=`<div class="blk sop a-${d.accent}"><h4>标准与注意事项 <em>Standards &amp; notes</em></h4>${list(d.standards,'en')}</div>`;
+  if(d.note) h+=`<div class="notebox"><strong>备注 Note：</strong>${d.note.cn}<span class="e">${d.note.en}</span></div>`;
+  if(d.sopRole) h+=`<div class="srcline">SOP 角色 role：<strong>${d.sopRole}</strong> · RampingUp Inbound Pipeline SOP · Line #1</div>`;
+  return h;
+}
+
+/* ============ CARDS ============ */
+const CARD_IDS=['gm','warehouse','receiving','unpacking','inspecting','refrecv','shipping',
+                'finance','tech','testing','room1','room2','room3','dq','rma','poclosed'];
+document.getElementById('cards').innerHTML = CARD_IDS.map(id=>{
+  const d=D[id]; if(!d) return '';
+  return `<article class="card a-${d.accent}" data-card="${id}">
+    <div class="card-h">
+      <div class="k">${d.kind||''}</div>
+      <h3>${d.cn}</h3><div class="en">${d.en||''}</div>
+      ${d.who?`<div class="who">${d.who}</div>`:''}
+    </div>
+    <div class="card-b">${bodyHTML(d,true)}</div>
+  </article>`;
+}).join('');
+
+/* ============ DRAWER ============ */
+const drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim');
+function openDrawer(id){
+  const d=D[id]; if(!d) return;
+  document.querySelectorAll('.node.active,.st.act').forEach(n=>n.classList.remove('active','act'));
+  document.querySelectorAll(`.node[data-id="${id}"]`).forEach(n=>n.classList.add('active'));
+  document.querySelectorAll(`.st[data-id="${id}"]`).forEach(n=>n.classList.add('act'));
+  const head=document.getElementById('drHead');
+  head.className='dr-head a-'+d.accent;
+  document.getElementById('drKind').textContent=d.kind||'';
+  document.getElementById('drCn').textContent=d.cn;
+  document.getElementById('drEn').textContent=d.en||'';
+  document.getElementById('drWhoWrap').innerHTML = d.who?`<div class="who">${d.who}</div>`:'';
+  document.getElementById('drBody').innerHTML=bodyHTML(d,false);
+  document.getElementById('drBody').scrollTop=0;
+  drawer.classList.add('on'); scrim.classList.add('on'); drawer.setAttribute('aria-hidden','false');
+}
+function closeDrawer(){
+  drawer.classList.remove('on'); scrim.classList.remove('on'); drawer.setAttribute('aria-hidden','true');
+  document.querySelectorAll('.node.active,.st.act').forEach(n=>n.classList.remove('active','act'));
+}
+document.getElementById('close').onclick=closeDrawer;
+scrim.onclick=closeDrawer;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+document.addEventListener('click',e=>{
+  const tog=e.target.closest('[data-toggle]');
+  if(tog){
+    e.stopPropagation();
+    const li=tog.closest('li');
+    li.classList.toggle('collapsed');
+    tog.textContent = li.classList.contains('collapsed')?'+':'−';
+    setTimeout(()=>{if(!userZoom)fit();else syncH()},20);
+    return;
+  }
+  const el=e.target.closest('.node,.st');
+  if(el) openDrawer(el.dataset.id);
+});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  const el=e.target.closest('.node,.st');
+  if(el){e.preventDefault();openDrawer(el.dataset.id)}
+});
+
+/* ============ REVEAL ============ */
+const io=new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(en.isIntersecting){
+      const el=en.target;
+      setTimeout(()=>el.classList.add('in'), +(el.dataset.delay||0));
+      io.unobserve(el);
+    }
+  });
+},{threshold:.06});
+document.querySelectorAll('.node').forEach((n,i)=>{n.dataset.delay=Math.min(i*55,900);io.observe(n)});
+document.querySelectorAll('.card').forEach((n,i)=>{n.dataset.delay=Math.min(i*45,400);io.observe(n)});
+
+/* ============ CONTROLS ============ */
+let zoom=1, userZoom=false;
+const zval=document.getElementById('zval');
+function setZoom(v){
+  zoom=Math.min(1.4,Math.max(.5,v));
+  document.documentElement.style.setProperty('--zoom',zoom);
+  zval.textContent=Math.round(zoom*100)+'%';
+  syncH();
+}
+function syncH(){
+  const z=document.querySelector('.zoomer'), canvas=document.querySelector('.canvas');
+  if(!z||!canvas)return;
+  z.style.marginBottom=((zoom-1)*z.offsetHeight)+'px';
+  const avail=canvas.clientWidth-16, scaled=z.offsetWidth*zoom;
+  z.style.marginLeft = scaled<avail ? ((avail-scaled)/2)+'px' : '0px';
+  const sh=document.getElementById('scrollHint');
+  if(sh) sh.style.display = scaled>avail+4 ? 'block' : 'none';
+}
+function fit(){
+  if(userZoom)return;
+  const canvas=document.querySelector('.canvas'), z=document.querySelector('.zoomer');
+  if(!canvas||!z)return;
+  const avail=canvas.clientWidth-16, w=z.offsetWidth;
+  const minZ = window.innerWidth<760 ? .8 : .5;
+  setZoom(w>avail ? Math.max(minZ,(avail/w)-.01) : 1);
+}
+function centerRoot(){
+  const canvas=document.querySelector('.canvas'), root=document.querySelector('.node[data-id="group"]');
+  if(!canvas||!root) return;
+  if(canvas.scrollWidth<=canvas.clientWidth+2) return;
+  const r=root.getBoundingClientRect(), c=canvas.getBoundingClientRect();
+  canvas.scrollLeft += (r.left+r.width/2)-(c.left+c.width/2);
+}
+document.getElementById('zin').onclick=()=>{userZoom=true;setZoom(zoom+.1)};
+document.getElementById('zout').onclick=()=>{userZoom=true;setZoom(zoom-.1)};
+zval.onclick=()=>{userZoom=false;fit()};
+window.addEventListener('resize',()=>{clearTimeout(window.__ft);window.__ft=setTimeout(()=>{fit();setTimeout(centerRoot,320)},140)});
+setTimeout(()=>{fit();setTimeout(centerRoot,340)},60);
+
+let allOpen=true;
+document.getElementById('expand').onclick=function(){
+  allOpen=!allOpen;
+  document.querySelectorAll('#tree li').forEach(li=>{
+    if(!li.querySelector(':scope > ul'))return;
+    li.classList.toggle('collapsed',!allOpen);
+    const c=li.querySelector(':scope > .node .count'); if(c)c.textContent=allOpen?'−':'+';
+  });
+  this.innerHTML=allOpen?'收起全部 <i>Collapse</i>':'展开全部 <i>Expand</i>';
+  setTimeout(()=>{if(!userZoom)fit();else syncH()},20);
+};
+
+let flowPaused=false;
+document.getElementById('pause').onclick=function(){
+  const s=document.getElementById('flow');
+  flowPaused=!flowPaused;
+  try{ flowPaused ? s.pauseAnimations() : s.unpauseAnimations(); }catch(e){}
+  this.innerHTML=flowPaused?'播放动画 <i>Play</i>':'暂停动画 <i>Pause</i>';
+  this.classList.toggle('on',flowPaused);
+};
+document.getElementById('print').onclick=()=>window.print();
+
+const q=document.getElementById('q');
+function textOf(id){
+  const d=D[id]; if(!d) return '';
+  let t=[d.cn,d.en,d.who,d.sopRole,d.kind].filter(Boolean).join(' ');
+  ['duties','actions','standards','members'].forEach(k=>{
+    (d[k]||[]).forEach(x=>{t+=' '+(x.cn||'')+' '+(x.en||'')});
+  });
+  if(d.shared&&SHARED[d.shared])SHARED[d.shared].items.forEach(x=>t+=' '+x.cn+' '+x.en);
+  return t.toLowerCase();
+}
+q.addEventListener('input',()=>{
+  const v=q.value.trim().toLowerCase();
+  const all=document.querySelectorAll('.node,.st');
+  const cards=document.querySelectorAll('.card');
+  if(!v){
+    all.forEach(n=>n.classList.remove('dim','hit'));
+    cards.forEach(c=>c.style.display='');
+    return;
+  }
+  all.forEach(n=>{
+    const hit=textOf(n.dataset.id).includes(v);
+    n.classList.toggle('dim',!hit); n.classList.toggle('hit',hit);
+  });
+  cards.forEach(c=>{c.style.display = textOf(c.dataset.card).includes(v)?'':'none'});
+});
+
+document.getElementById('stamp').textContent='更新于 Updated '+new Date().toISOString().slice(0,10);
+</script>
+</body>
+</html>
